@@ -1,6 +1,5 @@
-
 <script>
-// render函数的基本用法
+  // render函数的基本用法
   export default {
     name: 'dialog-2',
     props: {
@@ -64,7 +63,13 @@
             class: {
               'dialog-content': true
             }
-          }, this.$slots.default),
+          }, [
+            ...this.$slots.default,
+            // 调用者加个属性 slot-scope="{text}"
+            this.$scopedSlots.default({
+              text: this.content.toLowerCase()
+            })
+          ]),
           h('div', {
             class: {
               'dialog-close-btn': true
