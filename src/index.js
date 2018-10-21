@@ -1,9 +1,23 @@
-import Vue from 'vue'
-import App from './App.vue'
+// import Vue from 'vue'
+// import App from './App.vue'
 
-let localName = 'abc';
+// let localName = 'abc';
+
+// new Vue({
+//     el: "#root",
+//     render:h=>h(App)
+// })
+import Vue from 'vue';
+import App from './App';
 
 new Vue({
-    el: "#root",
-    render:h=>h(App)
-})
+  el: '#app',
+  template: '<App/>',
+  components: { App }
+});
+
+
+if (module.hot) {
+    module.hot.accept();
+  }
+  

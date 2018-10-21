@@ -33,8 +33,16 @@ module.exports = {
             },
             {
                 test: /\.vue$/,
-                loader: 'vue-loader'
-            },
+                loader: 'vue-loader',
+                options: {
+                  transformAssetUrls: {
+                    video: ['src', 'poster'],
+                    source: 'src',
+                    img: 'src',
+                    image: 'xlink:href'
+                  }
+                }
+              },
             {
                 test: /\.css$/,
                 use: ['vue-style-loader','style-loader', 'css-loader', {
@@ -62,7 +70,7 @@ module.exports = {
         new VueLoaderPlugin(),
         new AutoDllPlugin({
             inject: true, // will inject the DLL bundle to index.html
-            debug: true,
+            debug: false,
             filename: '[name]_[hash].js',
             path: './dll',
             entry: {
