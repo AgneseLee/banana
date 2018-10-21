@@ -22,6 +22,7 @@
         <jsx-sample></jsx-sample>
         <component-a></component-a>
         <base-hello></base-hello>
+        <base-input v-model="username" class="username-input" placeholder="Enter your username" lgclass="smile" key="fososo"></base-input>
     </div>
 </template>
 
@@ -29,15 +30,19 @@
 import renderTag from "./vuedemo/renderTag";
 import jsxSample from "./components/jsxSample";
 import componentA from "./components/componentA";
+        
+import baseInput from "./components/baseInput"; //v-bind="$attrs"的用法
 import { mixinTest1 } from "./lib/mixins";
+
 
 export default {
   name: "App",
-//   mixins: [mixinTest1],
+  //   mixins: [mixinTest1],
   data() {
     return {
       tags: ["vue2", "vue3"],
-      name: "name"
+      name: "name",
+      username:'',
     };
   },
   created() {
@@ -47,8 +52,7 @@ export default {
     jsxSample,
     componentA
   },
-  mounted() {
-  }
+  mounted() {}
 };
 </script>
 
