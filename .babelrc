@@ -9,10 +9,14 @@
       "useBuiltIns": "usage"
     }]
   ],
-  "plugins": ["transform-vue-jsx", ["transform-runtime", {
-    "helpers": false,
-    "polyfill": false,
-    "regenerator": true,
-    "moduleName": "babel-runtime"
-  }]]
+  "plugins": [
+    "transform-vue-jsx",
+    ["transform-runtime", {
+      "helpers": false,
+      "polyfill": false,
+      "regenerator": true,
+      "moduleName": "babel-runtime"
+    }],
+    "lodash"
+  ]
 }

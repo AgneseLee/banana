@@ -1,6 +1,7 @@
 <template>
     <div>
         <h1>Hello World!!!!</h1>
+        <h1>{{name}}</h1>
         <render-tag v-model="tags">
             <!-- <h3 slot-scope="{exampleProp}">
                  hello {{exampleProp}}
@@ -19,26 +20,34 @@
             </div>
         </render-tag>
         <jsx-sample></jsx-sample>
+        <component-a></component-a>
+        <base-hello></base-hello>
     </div>
 </template>
 
 <script>
 import renderTag from "./vuedemo/renderTag";
 import jsxSample from "./components/jsxSample";
+import componentA from "./components/componentA";
+import { mixinTest1 } from "./lib/mixins";
 
 export default {
   name: "App",
+//   mixins: [mixinTest1],
   data() {
     return {
-      tags: ["vue2", "vue3"]
+      tags: ["vue2", "vue3"],
+      name: "name"
     };
   },
+  created() {
+    console.log("APP!!");
+  },
   components: {
-    jsxSample
+    jsxSample,
+    componentA
   },
   mounted() {
-    jsxSample.methods.doco();
-    console.log(jsxSample)
   }
 };
 </script>

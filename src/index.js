@@ -1,20 +1,20 @@
-// import Vue from 'vue'
-// import App from './App.vue'
-
-// let localName = 'abc';
-
-// new Vue({
-//     el: "#root",
-//     render:h=>h(App)
-// })
-import Vue from 'vue';
-import App from './App';
+import Vue from 'vue'
+import App from './App.vue'
+import './lib/globalregister'
 
 new Vue({
-  el: '#app',
-  template: '<App/>',
-  components: { App }
-});
+    el: "#app",
+    render:h=>h(App),
+    doNotInit: true
+})
+// import Vue from 'vue';
+// import App from './App';
+
+// new Vue({
+//   el: '#app',
+//   template: '<App/>',
+//   components: { App }
+// });
 
 
 if (module.hot) {

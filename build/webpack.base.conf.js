@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const AutoDllPlugin = require('autodll-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -81,7 +81,8 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: "[name].css",
             chunkFilename: "[id].css"
-        })
+        }),
+        new LodashModuleReplacementPlugin()
 
 
 
