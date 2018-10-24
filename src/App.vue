@@ -23,6 +23,7 @@
         <component-a></component-a>
         <base-hello></base-hello>
         <base-input v-model="username" class="username-input" placeholder="Enter your username" lgclass="smile" key="fososo"></base-input>
+
     </div>
 </template>
 
@@ -33,6 +34,8 @@ import componentA from "./components/componentA";
         
 import baseInput from "./components/baseInput"; //v-bind="$attrs"的用法
 import { mixinTest1 } from "./lib/mixins";
+import { sixValid } from "./lib/rules";
+
 
 
 export default {
@@ -52,7 +55,12 @@ export default {
     jsxSample,
     componentA
   },
-  mounted() {}
+  mounted() {},
+  watch:{
+    username(newVal){
+      sixValid.name = newVal;
+    }
+  }
 };
 </script>
 
