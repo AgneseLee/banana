@@ -21,7 +21,7 @@ function validator(target, validator, errorMsg) {
     })
 }
 
-const validators = {
+const rules = {
     name(value) {
         return value.length < 6
     },
@@ -42,7 +42,7 @@ const errorMsg = {
     email: '邮箱地址'
 }
 
-const sixValid = validator({}, validators, errorMsg)
+const sixValid = validator({}, rules, errorMsg)
 export {
     sixValid
 };
