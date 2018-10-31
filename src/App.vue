@@ -24,6 +24,7 @@
         <base-hello></base-hello>
         <base-input v-model="username" class="username-input" placeholder="Enter your username" lgclass="smile" key="fososo"></base-input>
         <render-cp></render-cp>
+        <ag-select :options="opList"></ag-select>
 
     </div>
 </template>
@@ -33,6 +34,7 @@ import renderTag from "./vuedemo/renderTag";
 import jsxSample from "./components/jsxSample";
 import componentA from "./components/componentA";
 import renderCp from "./components/renderCp.js";
+import agSelect from "./components/agSelect";
         
 import baseInput from "./components/baseInput"; //v-bind="$attrs"的用法
 import { mixinTest1 } from "./lib/mixins";
@@ -48,6 +50,10 @@ export default {
       tags: ["vue2", "vue3"],
       name: "name",
       username:'',
+      opList:[
+        {name:'vue2'},
+        {name: 'vue3'}
+      ]
     };
   },
   created() {
@@ -57,6 +63,7 @@ export default {
     jsxSample,
     componentA,
     // renderCp
+    agSelect
   },
   mounted() {},
   watch:{
