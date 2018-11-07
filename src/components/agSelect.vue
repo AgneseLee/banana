@@ -1,8 +1,8 @@
 <template>
   <div ref="select" class="g-dropdown" :class="{'show':option}" v-clickoutside>
     <span :class="{'dropdown-text':true ,'six-select-disabled':isDisabled}" @click="toggle">{{activeName}}</span>
-    <div class="dropdown-menu" >
-      <ul class="dropdown-list" :style="{'max-height':height+'px'}" >
+    <div class="dropdown-menu">
+      <ul class="dropdown-list" :style="{'max-height':height+'px'}">
         <li class="dropdown-item" v-for="(item,index) in list" :key="'select-'+index" :value="item.value" @click.stop="choose(item)">{{item.name}}
           <i v-if="canDel" @click.stop="delItem(item)" class="icon-delete"></i>
         </li>
@@ -131,6 +131,24 @@
           value: 0,
           name: channel.name
         };
+      },
+      status() {
+        const actions = () => {
+          const functionA = () => { /*do sth*/ }
+          const functionB = () => { /*do sth*/ }
+          const functionC = () => { /*send log*/ }
+          return new Map([
+            [/^guest_[1-4]$/, functionA],
+            [/^guest_5$/, functionB],
+            [/^guest_.*$/, functionC],
+            //...
+          ])
+        }
+
+        const onButtonClick = (identity, status) => {
+          let action = [...actions()].filter(([key, value]) => (key.test(`${identity}_${status}`)))
+          action.forEach(([key, value]) => value.call(this))
+        }
       }
     }
   };
