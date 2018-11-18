@@ -1,32 +1,39 @@
 <template>
-    <div>
-        <h1>Hello World!!!!</h1>
-        <h1>{{name}}</h1>
-        <render-tag v-model="tags">
-            <!-- <h3 slot-scope="{exampleProp}">
+  <div>
+    <h1>Hello World!!!!</h1>
+    <h1>{{name}}</h1>
+    <render-tag v-model="tags">
+      <!-- <h3 slot-scope="{exampleProp}">
                  hello {{exampleProp}}
-            </h3>-->
-            <div slot-scope="{tags, removeTag, inputAttrs, inputEvent}" class="tags-input">
-                <span v-for="tag in tags" :key="tag" class="tags-input-tag">
-                    <span>{{tag}}</span>
-                    <button type="button" class="tags-input-remove" @click="removeTag(tag)">&times;</button>
-                </span>
-                <input
-                    v-bind="inputAttrs"
-                    v-on="inputEvent"
-                    class="tags-input-text"
-                    placeholder="Add tag..."
-                >
-            </div>
-        </render-tag>
-        <jsx-sample></jsx-sample>
-        <component-a></component-a>
-        <base-hello></base-hello>
-        <base-input v-model="username" class="username-input" placeholder="Enter your username" lgclass="smile" key="fososo"></base-input>
-        <render-cp></render-cp>
-        <ag-select :options="opList"></ag-select>
-
-    </div>
+      </h3>-->
+      <div slot-scope="{tags, removeTag, inputAttrs, inputEvent}" class="tags-input">
+        <span v-for="tag in tags" :key="tag" class="tags-input-tag">
+          <span>{{tag}}</span>
+          <button type="button" class="tags-input-remove" @click="removeTag(tag)">&times;</button>
+        </span>
+        <input
+          v-bind="inputAttrs"
+          v-on="inputEvent"
+          class="tags-input-text"
+          placeholder="Add tag..."
+        >
+      </div>
+    </render-tag>
+    <jsx-sample></jsx-sample>
+    <component-a></component-a>
+    <base-hello></base-hello>
+    <base-input
+      v-model="username"
+      class="username-input"
+      placeholder="Enter your username"
+      lgclass="smile"
+      key="fososo"
+    ></base-input>
+    <render-cp></render-cp>
+    <ag-select :options="opList"></ag-select>
+    <button id="wm">我是被引用的DOM</button>
+    <!-- <button @click="rmo">移除点我</button> -->
+  </div>
 </template>
 
 <script>
@@ -35,7 +42,7 @@ import jsxSample from "./components/jsxSample";
 import componentA from "./components/componentA";
 import renderCp from "./components/renderCp.js";
 import agSelect from "./components/agSelect";
-        
+
 import baseInput from "./components/baseInput"; //v-bind="$attrs"的用法
 import { mixinTest1 } from "./lib/mixins";
 import { sixValid } from "./lib/rules";
@@ -49,11 +56,8 @@ export default {
     return {
       tags: ["vue2", "vue3"],
       name: "name",
-      username:'',
-      opList:[
-        {name:'vue2'},
-        {name: 'vue3'}
-      ]
+      username: "",
+      opList: [{ name: "vue2" }, { name: "vue3" }]
     };
   },
   created() {
@@ -66,9 +70,21 @@ export default {
     agSelect
   },
   mounted() {},
-  watch:{
-    username(newVal){
+  watch: {
+    username(newVal) {
       sixValid.name = newVal;
+    }
+  },
+  methods: {
+    rmo() {
+      let wm = new WeakMap();
+      let btn = document.getElementById("wm");
+      wm.set(btn, { count: 0 });
+      btn.addEventListener("click", () => {
+        let v = wm.get(btn);
+        v.count++;
+        console.log(wm.get(btn).count);
+      });
     }
   }
 };

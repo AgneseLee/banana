@@ -2,3 +2,12 @@ Git is a version control system.
 Git is free software.
 Git has a mutable index called stage.
 Creating a new branch is quick & simple.
+
+
+内存泄漏：
+1. 给DOM绑定监听事件，如果DOM消失后，手动清除DOM引用对象（置null），那么监听事件是否会移出内存？ 是否与监听函数中是否
+引用DOM引用对象有关？
+
+2.weakmap可以随着DOM的消失，直接移除wm中与DOM引用对象的属性值。
+
+3.使用timer如何避免内存泄漏？在vue中，如果实例已经销毁，实例中调用的timer是否跟随移除？
