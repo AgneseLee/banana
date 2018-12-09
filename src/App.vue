@@ -1,5 +1,6 @@
 <template>
   <div>
+    <router-view></router-view>
     <h1>Hello World!!!!</h1>
     <h1>{{name}}</h1>
     <render-tag v-model="tags">
@@ -20,6 +21,7 @@
     <base-input v-model="username" class="username-input" placeholder="Enter your username" lgclass="smile" key="fososo"></base-input>
     <render-cp></render-cp>
     <ag-select :list="opList"></ag-select>
+    <button @click="goToHome">按钮</button>
 
   </div>
 </template>
@@ -74,6 +76,11 @@
     watch: {
       username(newVal) {
         sixValid.name = newVal;
+      }
+    },
+    methods:{
+      goToHome(){
+        this.$router.push('./home')
       }
     }
   };
