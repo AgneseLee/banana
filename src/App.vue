@@ -1,6 +1,7 @@
 <template>
   <div>
-    <!-- <h1>Hello World!!!!</h1> -->
+    <router-view></router-view>
+    <h1>Hello World!!!!</h1>
     <h1>{{name}}</h1>
     <render-tag v-model="tags">
       <!-- <h3 slot-scope="{exampleProp}">
@@ -22,6 +23,7 @@
     <ag-select :list="opList"></ag-select>
     <cache-test v-if="showCache" @brod="showCache= false"></cache-test>
     <button @click="showCache=true">恢复cache-test</button>
+    <button @click="goToHome">按钮</button>
 
   </div>
 </template>
@@ -81,6 +83,11 @@
     watch: {
       username(newVal) {
         sixValid.name = newVal;
+      }
+    },
+    methods:{
+      goToHome(){
+        this.$router.push('./home')
       }
     }
   };

@@ -1,23 +1,20 @@
 import Vue from 'vue'
+import VueRouter from 'vue-router';
+
 import App from './App.vue'
+import routes from './router'
 import './lib/globalregister'
+Vue.use(VueRouter); //挂载属性
+
+let router = new VueRouter(routes);
 
 new Vue({
-    el: "#app",
-    render:h=>h(App),
-    doNotInit: true
+  el: "#app",
+  router: router,
+  render: h => h(App),
+  doNotInit: true
 })
-// import Vue from 'vue';
-// import App from './App';
-
-// new Vue({
-//   el: '#app',
-//   template: '<App/>',
-//   components: { App }
-// });
-
 
 if (module.hot) {
-    module.hot.accept();
-  }
-  
+  module.hot.accept();
+}
