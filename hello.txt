@@ -7,7 +7,56 @@ Creating a new branch is quick & simple.
 内存泄漏：
 1. 给DOM绑定监听事件，如果DOM消失后，手动清除DOM引用对象（置null），那么监听事件是否会移出内存？ 是否与监听函数中是否
 引用DOM引用对象有关？
+Chrome等非IE浏览器使用Node.removeChild(element)和ChildNode.remove()并不会直接释放对应的event listener，但是会被gc。
+如果该dom对象在js中再无其他引用，与之绑定的event listener就会在合理的时机被gc；但IE需要手动移除event listener。
+    let dying = document.getElementById("todo");
+    dying.addEventListener("click", () => {
+        console.log('@@@!!');
+        dying.innerHTML="cccccccccccc tsed"; // 如果这样循环引用，单独使用removechild无法移除eventlistener，需要同时使用null
+    });
+    document.body.removeChild(dying); // 单独使用：浏览器自动移除eventlistener
+    dying = null; // 单独使用：不会移除eventlistener
 
-2.weakmap可以随着DOM的消失，直接移除wm中与DOM引用对象的属性值。
+
+2.weakmap可以随着对象的取消引用，直接移除wm中引用对象的KV。
+实验结果：
+const key = new Array(5 * 1024 * 1024);
+const arr = [
+  [key, 1]
+];
+key = null;
+只是去掉了 key 对 Obj 的强引用，并没有去除 arr 对 Obj 的强引用，所以 Obj 还是不会被回收掉。
+
+const wm = new WeakMap();
+let key = new Array(5 * 1024 * 1024);
+wm.set(key, 1);
+key = null;
+weakmap建立的是弱引用，key=null后下一次回收weakmap中的相关KV即可被回收。
 
 3.使用timer如何避免内存泄漏？在vue中，如果实例已经销毁，实例中调用的timer是否跟随移除？
+timer产生内存泄漏的常见原因：生成闭包，引入全局变量;
+如果外部已经触发组件的destroy(),timer不会随之删除，timer中的状态也会被保存;
+
+4.为啥重新赋一个同样大的值，它的内存会上升？
+首先，只要当闭包中调用局部变量，此局部变量就会一直存在内存中，无法移除。
+闭包链表已经建立，每次新建大数组的同时，也会新建一个闭包，所以所有旧数据都会存进缓存。
+这种时候有两种解决办法：销毁闭包或者手动清除局部变量的引用。
+    var theThing = null;
+    var i = 0;
+    var replaceThing = function () {
+        var originalThing = theThing;
+        // 注释unused，闭包消失
+        var unused = function () {
+            if (originalThing)
+                console.log(originalThing.longStr.wp.length,originalThing.longStr.idx);
+        };
+        theThing = {
+            longStr: { 'wp' : new Array(1000000).join('*'), 'idx':(i++)},
+            someMethod: function () {
+                console.log('abc');
+            }
+        };
+        originalThing = null; // 方法2
+    };
+
+    setInterval(replaceThing, 1000);

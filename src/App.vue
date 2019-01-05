@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Hello World!!!!</h1>
+    <!-- <h1>Hello World!!!!</h1> -->
     <h1>{{name}}</h1>
     <render-tag v-model="tags">
       <!-- <h3 slot-scope="{exampleProp}">
@@ -20,6 +20,8 @@
     <base-input v-model="username" class="username-input" placeholder="Enter your username" lgclass="smile" key="fososo"></base-input>
     <render-cp></render-cp>
     <ag-select :list="opList"></ag-select>
+    <cache-test v-if="showCache" @brod="showCache= false"></cache-test>
+    <button @click="showCache=true">恢复cache-test</button>
 
   </div>
 </template>
@@ -27,6 +29,7 @@
 <script>
   import './css/dialog/dialog.css';
   import renderTag from "./vuedemo/renderTag";
+  import cacheTest from "./vuedemo/cacheTest";
   import jsxSample from "./components/jsxSample";
   import componentA from "./components/componentA";
   import renderCp from "./components/renderCp.js";
@@ -58,7 +61,8 @@
             name: 'vue3',
             value: 456
           }
-        ]
+        ],
+        showCache:true
       };
     },
     created() {
@@ -68,9 +72,12 @@
       jsxSample,
       componentA,
       // renderCp
-      agSelect
+      agSelect,
+      cacheTest
     },
-    mounted() {},
+    mounted() {
+      console.log('**************',this.tags)
+    },
     watch: {
       username(newVal) {
         sixValid.name = newVal;
