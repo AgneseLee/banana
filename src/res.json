@@ -1,0 +1,82 @@
+{
+    "entities": {
+        "ivProducts": {
+            "100170": {
+                "productId": 100170,
+                "productName": "test2",
+                "productCode": "26"
+            },
+            "100382": {
+                "productId": 100382,
+                "productName": "test4",
+                "productCode": "24"
+            },
+            "100383": {
+                "productId": 100383,
+                "productName": "test3",
+                "productCode": "25"
+            },
+            "105382": {
+                "productId": 105382,
+                "productName": "test4",
+                "productCode": "24"
+            },
+            "105383": {
+                "productId": 105383,
+                "productName": "test3",
+                "productCode": "25"
+            },
+            "106255": {
+                "productId": 106255,
+                "productName": "test1",
+                "productCode": "23"
+            },
+            "107170": {
+                "productId": 107170,
+                "productName": "test2",
+                "productCode": "26"
+            }
+        },
+        "underWrites": {
+            "124179": {
+                "id": 124179,
+                "mainTaskId": 100015540
+            },
+            "125199": {
+                "id": 125199,
+                "mainTaskId": 100015560
+            },
+            "125254": {
+                "id": 125254,
+                "mainTaskId": 100015570
+            }
+        },
+        "mainTasks": {
+            "100015540": {
+                "mainTaskId": 100015540,
+                "name": "测试666",
+                "idType": "01",
+                "idNum": "211XXXXXXX012",
+                "ivProducts": [100382, 100383, 100170],
+                "underwrite": 124179
+            },
+            "100015560": {
+                "mainTaskId": 100015560,
+                "name": "高老庄",
+                "idType": "01",
+                "idNum": "211402199XXXXXXX12",
+                "ivProducts": [107170, 105382, 105383],
+                "underwrite": 125199
+            },
+            "100015570": {
+                "mainTaskId": 100015570,
+                "name": "测试",
+                "idType": "01",
+                "idNum": "2114021XXXXXXXX12",
+                "ivProducts": [106255],
+                "underwrite": 125254
+            }
+        }
+    },
+    "result": [100015570, 100015560, 100015540]
+}

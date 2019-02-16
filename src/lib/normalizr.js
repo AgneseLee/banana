@@ -100,5 +100,8 @@ originalData = [
         },
     },
 ];
-normalizedData = normalize(originalData, [mainTask]);
-console.log(JSON.stringify(normalizedData));
+normalizedData = JSON.stringify(normalize(originalData, [mainTask]));
+export{
+    normalizedData
+}
+// console.log(JSON.stringify(normalizedData));

@@ -44,7 +44,7 @@
   import {
     sixValid
   } from "./lib/rules";
-
+import {normalizedData } from "./lib/normalizr"
 
 
   export default {
@@ -79,6 +79,7 @@
     },
     mounted() {
       console.log('**************',this.tags)
+      console.log('999999999999999999 ', normalizedData)
     },
     watch: {
       username(newVal) {
